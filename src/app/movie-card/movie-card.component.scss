@@ -1,0 +1,15 @@
+.movie-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  justify-content: center;
+  margin-top: 11vh;
+}
+.movie-card {
+  margin: 50px;
+  margin-bottom: 250px;
+  width: 450px;
+  height: 550px;
+}
+
