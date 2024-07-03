@@ -29,9 +29,10 @@ export class FetchApiDataService {
   }
 
   //api call to find One specific user by username
-  getOneUser(Username: string): Observable<any> {
+  getOneUser(): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + `/users/${Username}`, {headers: new HttpHeaders(
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return this.http.get(apiUrl + `/users/${user.Username}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -46,9 +47,10 @@ export class FetchApiDataService {
   // }
   
   //api PUT call to update user info
-  updateUserInfo(Username: string): Observable<any> {
+  updateUserInfo(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + `/users/${Username}`, {headers: new HttpHeaders(
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return this.http.put(apiUrl + `/users/${user.Username}`, userDetails, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -58,9 +60,10 @@ export class FetchApiDataService {
   }
   
   //api DELETE call to delete user info from database
-  deleteUser(Username: string): Observable<any> {
+  deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + `/users/${Username}`, {headers: new HttpHeaders(
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return this.http.delete(apiUrl + `/users/${user.Username}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
