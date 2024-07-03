@@ -25,6 +25,7 @@ import { GenreInfoComponent } from './genre-info/genre-info.component';
 import { SynopsisInfoComponent } from './synopsis-info/synopsis-info.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MatDividerModule} from '@angular/material/divider';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
     MatIconModule,
     ReactiveFormsModule,
     MatToolbarModule,
+    MatDividerModule
   ],
   providers: [
     provideAnimationsAsync(),

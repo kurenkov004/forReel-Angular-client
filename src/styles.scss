@@ -12,15 +12,19 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$forReel-Angular-client-primary: mat.define-palette(mat.$indigo-palette);
-$forReel-Angular-client-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// $forReel-Angular-client-primary: mat.define-palette(mat.$indigo-palette);
+// $forReel-Angular-client-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$forReel-Angular-client-primary: mat.define-palette(mat.$teal-palette);
+$forReel-Angular-client-accent: mat.define-palette(mat.$orange-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $forReel-Angular-client-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$forReel-Angular-client-theme: mat.define-light-theme((
+$forReel-Angular-client-theme: mat.define-dark-theme((
   color: (
     primary: $forReel-Angular-client-primary,
     accent: $forReel-Angular-client-accent,
@@ -37,5 +41,5 @@ $forReel-Angular-client-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; --mat-toolbar-container-background-color: #009688;  }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: rgb(16, 16, 16); }

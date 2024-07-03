@@ -1,22 +1,26 @@
 <div class="main-page">
-  <h1>
-    Welcome to ForReel!
-  </h1>
-  <button
-    mat-raised-button
-    (click)="openUserRegistrationDialog()"
-    style="margin-right: 10px;"
-    color="primary"
-  >
-    Sign Up
-  </button>
-  <button
-    mat-raised-button
-    (click)="openUserLoginDialog()"
-    class="button-confirmation"
-    style="margin-right: 10px;"
-    color="primary"
-  >
-    Log In
-  </button>
+    <h1 style="color: lightgrey;">
+      Welcome to ForReel
+    </h1>
+
+    <div class="button-container">
+      <button
+        mat-flat-button
+        (click)="openUserRegistrationDialog()"
+        style="margin-right: 10px;"
+        color="primary"
+        class="welcome-button"
+      >
+        Sign Up
+      </button>
+      <button
+        mat-flat-button
+        (click)="openUserLoginDialog()"
+        class="button-confirmation welcome-button"
+        style="margin-right: 10px;"
+        color="primary"
+      >
+        Log In
+      </button>
+    </div>
 </div>
