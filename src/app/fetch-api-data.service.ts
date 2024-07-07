@@ -13,6 +13,11 @@ export class FetchApiDataService {
   constructor(private http: HttpClient) {
   }
 
+      /**
+     * create new user
+     * @param {Object} userDetails must include username, password and password. Optional: birthday
+     * @returns 
+     */
   //api call to POST user registration
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
@@ -21,13 +26,18 @@ export class FetchApiDataService {
     );
   }
 
+      /**
+     * login
+     * @param {Object} userDetails must include username and password
+     * @returns 
+     */
   //api call to POST user login
   public userLogin(userDetails: any): Observable<any> {
     return this.http.post(apiUrl + '/login', userDetails).pipe(
     catchError(this.handleError)  
     )
   }
-
+  
   //api call to find One specific user by username
   getOneUser(): Observable<any> {
     const token = localStorage.getItem('token');
@@ -40,11 +50,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  // getOneUser(): Observable<any> {
-  //   const user = JSON.parse(localStorage.getItem('user') || '{}');
-  //   return user;
-  // }
   
   //api PUT call to update user info
   updateUserInfo(userDetails: any): Observable<any> {
