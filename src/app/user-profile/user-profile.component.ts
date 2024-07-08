@@ -10,6 +10,12 @@ import { SynopsisInfoComponent } from '../synopsis-info/synopsis-info.component'
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 
+/**
+ * @description Component representing the user profile page.
+ * @selector 'app-user-profile'
+ * @templateUrl './user-profile.component.html'
+ * @styleUrls ['./user-profile.component.scss']
+ */
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -26,6 +32,14 @@ export class UserProfileComponent implements OnInit {
   user: any = {};
   movies: any[] = [];
 
+    /**
+   * @constructor - Constructor for UserProfileComponent.
+   * @param {FetchApiDataService} fetchApiData - Service for fetching data from the API.
+   * @param {MovieCardComponent} movieCard - initialises the MovieCard import.
+   * @param {MatSnackBar} snackBar - Material snack bar service for displaying notifications.
+   * @param {Router} router - Router service for navigation.
+   * @param {MatDialog} dialog - Material dialog service for opening dialogs.
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public movieCard: MovieCardComponent,
@@ -39,7 +53,10 @@ export class UserProfileComponent implements OnInit {
     this.getFavMovies()
   }
 
-  //fetch user info
+  /**
+   * Function for getting current user info.
+   * @returns users username, email, birthday, and favorite movies.
+   */
   getUserProfile(): void {
     this.user = this.fetchApiData.getOneUser();
     this.userData.Username = this.user.Username;
@@ -51,7 +68,10 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-
+  /**
+   * Function for updating user info.
+   * @returns message "User profile updated!" and updates localStorage user object.
+   */
   updateUserProfile(): void {
     this.fetchApiData.updateUserInfo(this.userData).subscribe((result) => {
       console.log('updated user info!');
@@ -62,6 +82,10 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+    /**
+   * Function for deleting current user.
+   * @returns message "User profile has been deleted." and navigates back to welcome page.
+   */
   deleteUserProfile(): void {
     this.router.navigate(['welcome']).then(() => {
       localStorage.clear();
@@ -74,7 +98,10 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  //function to get all movies and assign that data to the "movies" array declared earlier
+    /**
+   * Function for getting a list of All movies present in database.
+   * @returns all movies & assigns them to empty this.movies array.
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -83,7 +110,13 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  //opens dialog with movie director info
+  /**
+   * Function that will open the dialog when director button is clicked.
+   * @param {string} name - Name of the director.
+   * @param {string} bio - Biography of the director.
+   * @param {string} birth - Birth date of the director.
+   * @returns a dialog with director name and info.
+   */
   openDirectorInfo(name: string, bio: string, birth: string ): void {
     this.dialog.open(DirectorInfoComponent, {
       data: {
@@ -95,7 +128,12 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  //opens dialog with movie genre info
+ /**
+   * Function that will open the dialog when genre button is clicked.
+   * @param {string} genreName - Name of the genre.
+   * @param {string} genreDescriptionescription - Description of the genre.
+   * @returns a dialog with genre name and description.
+   */
   openGenreInfo(genreName: string, genreDescription: string ): void {
    this.dialog.open(GenreInfoComponent, {
     data: {
@@ -106,7 +144,11 @@ export class UserProfileComponent implements OnInit {
    }) 
   }
 
-  //opens dialog with movie synopsis
+  /**
+   * Function that will open the dialog when synopsis button is clicked
+   * @param {string} description - Description of the movie.
+   * @returns a dialog with the movie synopsis.
+   */
   openMovieSynopsis(description: string): void {
     this.dialog.open(SynopsisInfoComponent, {
       data: {
@@ -117,7 +159,10 @@ export class UserProfileComponent implements OnInit {
   }
 
 
-
+  /**
+   * Function to get favMovie list.
+   * @returns Favorite movies of user; full movie objects (including director, genre info, etc).
+  */
   getFavMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       let movies = resp;
@@ -129,7 +174,12 @@ export class UserProfileComponent implements OnInit {
       this.FavMovies = favorites;
     });
   }
-  //takes a movie object as an argument -> input whichever movie needs to be checked
+
+    /**
+   * Function to check if movie is a favorite movie.
+   * @param movie  - Movie object to check.
+   * @returns {boolean} - Boolean indicating whether the movie is a favorite.
+   */
   isFavCheck(movie: any): any {
     const MovieID = movie._id;
     if (this.FavMovies.some((id) => id === MovieID)) {
@@ -139,13 +189,21 @@ export class UserProfileComponent implements OnInit {
     }
   }
   
-
+    /**
+   * Function toggle favMovie by icon button
+   * @param {any} movie - Movie to toggle favorite icon for. 
+   */
   toggleFav(movie: any): void {
     const isFavorite = this.isFavCheck(movie);
     isFavorite
     ? this.removeFav(movie) : this.addFav(movie);
   }
 
+    /**
+   * Function to add movie to FavMovies array
+   * @param {any} movie - Movie to add to favorite movies.
+   * @returns Message "Movie added to your favorites!", updates localStorage and FavMovies array
+   */
   addFav(movie: any): void {
     console.log(movie)
     this.fetchApiData.addFavService(movie._id).subscribe((resp: any) => {
@@ -169,6 +227,11 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+      /**
+   * Function to remove a movie from FavMovies array.
+   * @param {any} movie - Movie to delete from favorite movies.
+   * @returns Message "Movie removed from Favourites"
+   */
   removeFav(movie: any): void {
     console.log(movie)
     this.fetchApiData.removeFavService(movie._id).subscribe((resp: any) => {
