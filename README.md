@@ -29,7 +29,7 @@ The project objective was to use Angular and build the client-side component cal
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Deployed application
-forreel-angular.netlify.app
+[forreel-angular.netlify.app](https://forreel-angular.netlify.app/)
 
 ## Code scaffolding
 
